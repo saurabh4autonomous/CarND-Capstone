@@ -39,12 +39,11 @@ ___
 
 ## Introduction
 
-The final project of the course was about implementing code for a real self-driving car, which drives safely around a track. It also recognizes traffic light signals and stops in case a red signal is detected. The system was first tested on a simulator and then on a real car.
-
+In the final project of the course we implemented code for a real self-driving car, which drives safely around a track. It recognizes traffic light signals and stops in case a red signal is detected. The system was first tested on a simulator and then on a real car.
 
 ## System Architecture
 
-The following graphic shows the system architecture which consists of the three subsystems
+The following graphic shows the general system architecture which consists of the three subsystems Perception, Planning and Control, and their connections in a ROS (Robot Operating System) architecture.
 * Perception,
 * Planning, and
 * Control,
@@ -56,6 +55,12 @@ and their connections in a ROS architecture.
 The three parts are described in detail below.
 
 #### i. Perception Module
+The perception subsystem is implemented in `tl_detector.py`.
+It was designed to classify traffic lights only, since those are the only relevant objects in the simulator and the surrounding during the tests in the real car.
+
+To determine the state of relevant traffic lights, camera images are classified by a CNN-based tensorflow model. 
+
+The module also receives the waypoints (`/base_waypoints`) around the track which the car is supposed to follow. There are eight traffic lights around the track, and the position of their stop lines are provided by a config file from Udacity (`sim_traffic_light_config.yaml`). Taking the cars position into account, the position of the relevant traffic light is determined and combined with the information of the classifier.
 
 #### ii. Planning Module
 ##### Overview
@@ -148,6 +153,7 @@ For PID and the low pass filter, we chose each parameter as follows.
 #### i. Workaround to avoid simulator latency issue with camera on
 - Processing every 5th image received,
 - Activating Classifier only when the traffic light waypoints are within 100 unit distance
+- Reducing Number of Waypoint Used to 50.
 
 ---
 ## Original README:
