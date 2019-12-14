@@ -2,10 +2,10 @@
 ## Capstone Project: System Integration
 [![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
+---
+####  Notes to Reviewer
 
-## Notes to Reviewer
-
-| Name 				| Udacity account email address | 
+| Name 				| Email address                 | 
 |:-----------------:|:----------------------------:	|
 | Florian Stahl		| f.stahl@posteo.de 			|
 | Saurabh Sharma	| saurabh1588sharma@gmail.com	|
@@ -13,64 +13,92 @@
 | Shinya Fujimura	| shinya.fujimura@gmail.com		|
 | Elham Asadi		| dr.elham.asadi@gmail.com		|
 
-
+---
+## Table of Contents
+1. [Introduction](#1-introduction)
+2. [System Architecture](#2-system-architecture)
+	1. [i. Perception Module](#i-perception-module)
+	2. [ii. Planning Module](#ii-planning-module)
+	3. [iii. Control Module](#iii-control-module)
+3. [Dataset Preparation](#3-dataset-preparation)
+	1. [i. Simulator Data](#i-simulator-data)
+	2. [ii. Site Data](#ii-site-data)
+4. [Traffic Light Classifier](#4-traffic-light-classifier)
+	1. [i. Tensorflow Object Detection API Installation](#i-tensorflow-object-detection-api-installation)
+	2. [ii. Choose and test a model from the Model Zoo](#ii-choose-and-test-a-model-from-the-model-zoo)
+	3. [iii. Configure the pipeline.config file](#iii-configure-the-pipelineconfig-file)
+	4. [iv. Test the training process locally](#iv-test-the-training-process-locally)
+	5. [v. Train with GPUs](#v-train-with-gpus)
+	6. [vi. Export and test the final graph](#vi-export-and-test-the-final-graph)
+5. [Final Integration](#5-final-integration)
+	1. [i. Model Evaluation](#i-model-evaluation)
+6. [Hardware/Software Setup](#6-hardware-software-setup)
+7. [Challenges Faced](#7-challenges-faced)
+ 	1. [i. Workaround to avoid simulator latency issue with camera on](#i-workaround-to-avoid-simulator-latency-issue-with-camera-on)
+___
 
 ## Introduction
 
-In the final project of the course we implemented code for a real self-driving car, which drives safely around a track. It recognizes traffic light signals and stops in case a red signal is detected. The system was first tested on a simulator and then on a real car.
+The final project of the course was about implementing code for a real self-driving car, which drives safely around a track. It also recognizes traffic light signals and stops in case a red signal is detected. The system was first tested on a simulator and then on a real car.
 
 
+## System Architecture
 
-## Overview 
+The following graphic shows the system architecture which consists of the three subsystems
+* Perception,
+* Planning, and
+* Control,
 
-The following graphic shows the general system architecture which consists of the three subsystems Perception, Planning and Control, and their connections in a ROS (Robot Operating System) architecture.
+and their connections in a ROS architecture.
 
 ![ros_img](./imgs/ros_architecture.png)
 
 The three parts are described in detail below.
 
+#### i. Perception Module
 
+#### ii. Planning Module
+##### Overview
+This module publishes a list of waypoints in front of our car to the topic `/final_waypoints`. The data in waypoints also includes the desired velocity of the car at the given waypoint. If a red traffic light is detected in front of the car, we modify the desired velocity of the `/final_waypoints` up to it in a way that the car slowly stops at the right place.
+###### Subscribed Topics
+This node subscribes to the topics:
+- `/base_waypoints`: list of all waypoints for the track
+- `/current_pose`: the current position coordinates of our car
+- `/traffic_waypoint`: waypoint list of the traffic light in our circuit
 
-## Perception
+###### Published Topics
+- `/final_waypoints`: list of waypoints to be follwed by Control Module for driving/
 
-The perception subsystem is implemented in `tl_detector.py`.
-It was designed to classify traffic lights only, since those are the only relevant objects in the simulator and the surrounding during the tests in the real car.
+The number of waypoints is defined by the parameter `LOOKAHEAD_WPS`. 
+*Note* : Number of waypoints are directly proportional to Lateny
 
-To determine the state of relevant traffic lights, camera images are classified by a CNN-based tensorflow model. 
+![waypoint_Updater_img](./imgs/waypoint_updater_diagram.jpg)
 
-The module also receives the waypoints (`/base_waypoints`) around the track which the car is supposed to follow. There are eight traffic lights around the track, and the position of their stop lines are provided by a config file from Udacity (`sim_traffic_light_config.yaml`). Taking the cars position into account, the position of the relevant traffic light is determined and combined with the information of the classifier.
+##### Implementation
+Refer to the Block Diagram. It uses KD Tree to extract x,y co-ordinates from `/base_waypoints` 
 
-
-
-## Planning
-
-
-
-## Control
-
-### Overview
+#### iii. Control Module
+##### Overview
 
 The vehicle is controlled with DBW (=drive by wire) system, which electronically controls throttle, brake and steering. DBW node  (`dbw_node.py`)  will subscribe to the `/twist_cmd` topic. The node accepts target linear and angular velocities and publishes throttle, brake, and steering commands.
 
 The DBW node outputs can be turned off by a designated flag and the driver can control the car manually. The DBW status can be found by subscribing to `/vehicle/dbw_enabled`.
 
-### Inputs and outputs
-
 The inputs to the DBW node are the below topics:
 
-### Subscribers
+###### Subscribed Topics
 * /twist_cmd: Twist commands are published by the waypoint follower node. The DBW node subscribes to this topic and produces the required output in terms of throttle, brake, and steering commands.
 * /current_velocity: This is published by the simulator in our case. Then, the DBW node uses it to decide on the linear velocity of the car and provides it to the controller.
 * /vehicle/dbw_enabled: This is the status of the DBW. It is published by the simulator in our case. The node will determine whether the brake, throttle and steering are to be published to respective topics or not according to the status.
 
 The outputs from the DBW node are the throttle, brake and steering commands published to the below topics.
 
-### Publishers
+###### Published Topics
 * /vehicle/throttle_cmd
 * /vehicle/brake_cmd
 * /vehicle/steering_cmd
 
-### Implementation
+##### Implementation
 
 Throttle and brake values are calculated as follows:
 
@@ -87,22 +115,40 @@ Steering value is calculated as follows:
 
 For PID and the low pass filter, we chose each parameter as follows.
 
-### PID
+##### PID
 |Kp|Ki|Kd|min|max|
 |:---:|:---:|:---:|:---:|:---:|
 |0.3|0.1|0.|0.|0.2|
 
-### Low pass filter
+##### Low pass filter
 |Tau|Ts|
 |:---:|:---:|
 |0.5|0.02|
 
 
+## Dataset Preparation
+
+#### i. Simulator Data
+
+#### ii. Site Data
 
 
+## Traffic Light Classifier
+
+#### i. Tensorflow Object Detection API Installation
+#### ii. Choose and test a model from the Model Zoo
+
+## Final Integration
+#### i. Model Evaluation
+
+## Hardware/Software Setup
+
+## Challenges Faced
+#### i. Workaround to avoid simulator latency issue with camera on
+- Processing every 5th image received,
+- Activating Classifier only when the traffic light waypoints are within 100 unit distance
 
 ---
-
 ## Original README:
 
 This is the project repo for the final project of the Udacity Self-Driving Car Nanodegree: Programming a Real Self-Driving Car. For more information about the project, see the project introduction [here](https://classroom.udacity.com/nanodegrees/nd013/parts/6047fe34-d93c-4f50-8336-b70ef10cb4b2/modules/e1a23b06-329a-4684-a717-ad476f0d8dff/lessons/462c933d-9f24-42d3-8bdc-a08a5fc866e4/concepts/5ab4b122-83e6-436d-850f-9f4d26627fd9).
