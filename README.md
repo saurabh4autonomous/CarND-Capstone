@@ -17,21 +17,21 @@
 ## Table of Contents
 1. [Introduction](#1-introduction)
 2. [System Architecture](#2-system-architecture)
-	1. [i. Perception Module](#i-perception-module)
-	2. [ii. Planning Module](#ii-planning-module)
-	3. [iii. Control Module](#iii-control-module)
+	1. [Perception Module](#i-perception-module)
+	2. [Planning Module](#ii-planning-module)
+	3. [Control Module](#iii-control-module)
 3. [Dataset Preparation](#3-dataset-preparation)
-	1. [i. Simulator Data](#i-simulator-data)
-	2. [ii. Site Data](#ii-site-data)
+	1. [Simulator Data](#i-simulator-data)
+	2. [Site Data](#ii-site-data)
 4. [Traffic Light Classifier](#4-traffic-light-classifier)
-	1. [i. Tensorflow Object Detection API Installation](#i-tensorflow-object-detection-api-installation)
-	2. [ii. Choose and test a model from the Model Zoo](#ii-choose-and-test-a-model-from-the-model-zoo)
-	3. [iii. Configure the pipeline.config file](#iii-configure-the-pipelineconfig-file)
-	4. [iv. Test the training process locally](#iv-test-the-training-process-locally)
-	5. [v. Train with GPUs](#v-train-with-gpus)
-	6. [vi. Export and test the final graph](#vi-export-and-test-the-final-graph)
+	1. [Tensorflow Object Detection API Installation](#i-tensorflow-object-detection-api-installation)
+	2. [Choose and test a model from the Model Zoo](#ii-choose-and-test-a-model-from-the-model-zoo)
+	3. [Configure the pipeline.config file](#iii-configure-the-pipelineconfig-file)
+	4. [Test the training process locally](#iv-test-the-training-process-locally)
+	5. [Train with GPUs](#v-train-with-gpus)
+	6. [Export and test the final graph](#vi-export-and-test-the-final-graph)
 5. [Final Integration](#5-final-integration)
-	1. [i. Model Evaluation](#i-model-evaluation)
+	1. [Model Evaluation](#i-model-evaluation)
 6. [Hardware/Software Setup](#6-hardware-software-setup)
 7. [Challenges Faced](#7-challenges-faced)
  	1. [i. Workaround to avoid simulator latency issue with camera on](#i-workaround-to-avoid-simulator-latency-issue-with-camera-on)
@@ -76,6 +76,7 @@ The number of waypoints is defined by the parameter `LOOKAHEAD_WPS`.
 
 ##### Implementation
 Refer to the Block Diagram. It uses KD Tree to extract x,y co-ordinates from `/base_waypoints` 
+
 
 #### iii. Control Module
 ##### Overview
