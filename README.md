@@ -2,7 +2,7 @@
 ## Capstone Project: System Integration
 [![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
----
+
 ## Notes to Reviewer
 
 | Name 				| Udacity account email address | 
@@ -13,13 +13,13 @@
 | Shinya Fujimura	| shinya.fujimura@gmail.com		|
 | Elham Asadi		| dr.elham.asadi@gmail.com		|
 
----
+
 
 ## Introduction
 
 In the final project of the course we implemented code for a real self-driving car, which drives safely around a track. It recognizes traffic light signals and stops in case a red signal is detected. The system was first tested on a simulator and then on a real car.
 
----
+
 
 ## Overview 
 
@@ -29,7 +29,7 @@ The following graphic shows the general system architecture which consists of th
 
 The three parts are described in detail below.
 
----
+
 
 ## Perception
 
@@ -40,11 +40,11 @@ To determine the state of relevant traffic lights, camera images are classified 
 
 The module also receives the waypoints (`/base_waypoints`) around the track which the car is supposed to follow. There are eight traffic lights around the track, and the position of their stop lines are provided by a config file from Udacity (`sim_traffic_light_config.yaml`). Taking the cars position into account, the position of the relevant traffic light is determined and combined with the information of the classifier.
 
----
+
 
 ## Planning
 
----
+
 
 ## Control
 
