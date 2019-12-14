@@ -1,9 +1,9 @@
-## Udacity - Self-Driving Car Engineer Nanodegree
-### Capstone Project: System Integration
+# Udacity - Self-Driving Car Engineer Nanodegree
+## Capstone Project: System Integration
 [![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
 ---
-### Notes to Reviewer
+## Notes to Reviewer
 
 | Name 				| Udacity account email address | 
 |:-----------------:|:----------------------------:	|
@@ -15,30 +15,90 @@
 
 ---
 
-### Introduction
+## Introduction
 
-The final project of the course was about implementing code for a real self-driving car, which drives safely around a track. It also recognizes traffic light signals and stops in case a red signal is detected. The system was first tested on a simulator and then on a real car.
+In the final project of the course we implemented code for a real self-driving car, which drives safely around a track. It recognizes traffic light signals and stops in case a red signal is detected. The system was first tested on a simulator and then on a real car.
 
+---
 
-### Architecture 
+## Overview 
 
-The following graphic shows the system architecture which consists of the three subsystems
-* Perception,
-* Planning, and
-* Control,
-
-and their connections in a ROS architecture.
-
+The following graphic shows the general system architecture which consists of the three subsystems Perception, Planning and Control, and their connections in a ROS (Robot Operating System) architecture.
 
 ![ros_img](./imgs/ros_architecture.png)
 
 The three parts are described in detail below.
 
-#### Perception
+---
 
-#### Planning
+## Perception
 
-#### Control
+The perception subsystem is implemented in `tl_detector.py`.
+It was designed to classify traffic lights only, since those are the only relevant objects in the simulator and the surrounding during the tests in the real car.
+
+To determine the state of relevant traffic lights, camera images are classified by a CNN-based tensorflow model. 
+
+The module also receives the waypoints (`/base_waypoints`) around the track which the car is supposed to follow. There are eight traffic lights around the track, and the position of their stop lines are provided by a config file from Udacity (`sim_traffic_light_config.yaml`). Taking the cars position into account, the position of the relevant traffic light is determined and combined with the information of the classifier.
+
+---
+
+## Planning
+
+---
+
+## Control
+
+### Overview
+
+The vehicle is controlled with DBW (=drive by wire) system, which electronically controls throttle, brake and steering. DBW node  (`dbw_node.py`)  will subscribe to the `/twist_cmd` topic. The node accepts target linear and angular velocities and publishes throttle, brake, and steering commands.
+
+The DBW node outputs can be turned off by a designated flag and the driver can control the car manually. The DBW status can be found by subscribing to `/vehicle/dbw_enabled`.
+
+### Inputs and outputs
+
+The inputs to the DBW node are the below topics:
+
+### Subscribers
+* /twist_cmd: Twist commands are published by the waypoint follower node. The DBW node subscribes to this topic and produces the required output in terms of throttle, brake, and steering commands.
+* /current_velocity: This is published by the simulator in our case. Then, the DBW node uses it to decide on the linear velocity of the car and provides it to the controller.
+* /vehicle/dbw_enabled: This is the status of the DBW. It is published by the simulator in our case. The node will determine whether the brake, throttle and steering are to be published to respective topics or not according to the status.
+
+The outputs from the DBW node are the throttle, brake and steering commands published to the below topics.
+
+### Publishers
+* /vehicle/throttle_cmd
+* /vehicle/brake_cmd
+* /vehicle/steering_cmd
+
+### Implementation
+
+Throttle and brake values are calculated as follows:
+
+1. Apply the low pass filter to the current velocity to reduce noise.
+2.	Calculate the difference between the current velocity and the target velocity (=vel_error)
+3.	Calculate the throttle value with the PID controller.
+4.	If the target velocity and the current velocity are almost 0, set the throttle to zero and apply the maximum braking value.
+5.	If vel_error is negative and the throttle value is less than 0.1, calculate the brake value by abs(decel) * self.vehicle_mass * self.wheel_radius. Set the deceleration value (=decel) at the maximum of vel_error and the deceleration limit. 
+
+Steering value is calculated as follows:
+
+1.	Apply the low pass filter to the current velocity to reduce noise.
+2.	Pass the linear velocity, the angular velocity and the current velocity to the yaw controller (=self.yaw_controller.get_steering)
+
+For PID and the low pass filter, we chose each parameter as follows.
+
+### PID
+|Kp|Ki|Kd|min|max|
+|:---:|:---:|:---:|:---:|:---:|
+|0.3|0.1|0.|0.|0.2|
+
+### Low pass filter
+|Tau|Ts|
+|:---:|:---:|
+|0.5|0.02|
+
+
+
 
 
 ---
