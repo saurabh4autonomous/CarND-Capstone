@@ -15,28 +15,28 @@
 
 ---
 ## Table of Contents
-1. [Introduction](#1-introduction)
-2. [System Architecture](#2-system-architecture)
-	1. [Perception Module](#i-perception-module)
-	2. [Planning Module](#ii-planning-module)
-	3. [Control Module](#iii-control-module)
-3. [Dataset Preparation](#3-dataset-preparation)
-	1. [Simulator Data](#i-simulator-data)
-	2. [Site Data](#ii-site-data)
-4. [Traffic Light Classifier](#4-traffic-light-classifier)
-	1. [Tensorflow Object Detection API Installation](#i-tensorflow-object-detection-api-installation)
-	2. [Choose and test a model from the Model Zoo](#ii-choose-and-test-a-model-from-the-model-zoo)
-	3. [Configure the pipeline.config file](#iii-configure-the-pipelineconfig-file)
-	4. [Test the training process locally](#iv-test-the-training-process-locally)
-	5. [Train with GPUs](#v-train-with-gpus)
-	6. [Export and test the final graph](#vi-export-and-test-the-final-graph)
-5. [Final Integration](#5-final-integration)
-	1. [Model Evaluation](#i-model-evaluation)
-6. [Challenges Faced](#6-challenges-faced)
- 	1. [Latency Issue](#i-latency-issue)
-7. [Instructions from Udacity](#7-instructions-from-udacity)
+[1. Introduction](#1.-introduction)
+[2. System Architecture](#2.-system-architecture)
+	[i. Perception Module](#i-perception-module)
+	[ii. Planning Module](#ii-planning-module)
+	[iii. Control Module](#iii-control-module)
+[3. Dataset Preparation](#3.-dataset-preparation)
+	[i. Simulator Data](#i.-simulator-data)
+	[ii. Site Data](#ii.-site-data)
+[4. Traffic Light Classifier](#4.-traffic-light-classifier)
+	i. [Tensorflow Object Detection API Installation](#i.-tensorflow-object-detection-api-installation)
+	ii. [Choose and test a model from the Model Zoo](#ii.-choose-and-test-a-model-from-the-model-zoo)
+	iii. [Configure the pipeline.config file](#iii.-configure-the-pipelineconfig-file)
+	iv. [Test the training process locally](#iv.-test-the-training-process-locally)
+	v. [Train with GPUs](#v.-train-with-gpus)
+	vi. [Export and test the final graph](#vi.-export-and-test-the-final-graph)
+[5. Final Integration](#5.-final-integration)
+	i. [Model Evaluation](#i.-model-evaluation)
+[6. Challenges Faced](#6.-challenges-faced)
+ 	i. [Latency Issue](#i.-latency-issue)
+[7. Instructions from Udacity](#7.-instructions-from-udacity)
 
-## Introduction
+## 1. Introduction
 
 In the final project of the course we implemented code for a real self-driving car, which drives safely around a track. It recognizes traffic light signals and stops in case a red signal is detected. The system was first tested on a simulator and then on a real car.
 
@@ -44,7 +44,7 @@ For running the system source code we used the virtual machine provided and reco
 
 **Note: Since we experienced latency issues with the virtual machine setup, we highly recommend using a native ubuntu installation.**
 
-## System Architecture
+## 2. System Architecture
 
 The following graphic shows the general system architecture which consists of the three subsystems Perception, Planning and Control, and their connections in a ROS (Robot Operating System) architecture.
 * Perception
@@ -109,6 +109,7 @@ Refer to the Block Diagram. It uses KD Tree to extract x,y co-ordinates from `/b
 
 
 #### iii. Control Module
+
 ##### Overview
 
 The vehicle is controlled with DBW (=drive by wire) system, which electronically controls throttle, brake and steering. DBW node  (`dbw_node.py`)  will subscribe to the `/twist_cmd` topic. The node accepts target linear and angular velocities and publishes throttle, brake, and steering commands.
@@ -157,7 +158,7 @@ For PID and the low pass filter, we chose each parameter as follows.
 |0.5|0.02|
 
 
-## Dataset Preparation
+## 3. Dataset Preparation
 
 Training the classifier in tensorflow requires 
 For both simulator- and site data 
@@ -169,16 +170,16 @@ For both simulator- and site data
 The dataset consists of 
 In addition, selected frames from the Udacity [ROSbag playback file](https://s3-us-west-1.amazonaws.com/udacity-selfdrivingcar/traffic_light_bag_file.zip) were exported, augmented, labeled and added to the dataset to be used for training as well.
 
-## Traffic Light Classifier
+## 4. Traffic Light Classifier
 
 #### i. Tensorflow Object Detection API Installation
 #### ii. Choose and test a model from the Model Zoo
 
-## Final Integration
+## 5. Final Integration
 #### i. Model Evaluation
 
 
-## Challenges Faced
+## 6. Challenges Faced
 #### i. Latency Issue 
 
 When turning the camera on in the simulator, we faced a very high latency which led to control failure of the car. The following methods improved the issue slightly, but still did not solve it.
@@ -189,7 +190,7 @@ When turning the camera on in the simulator, we faced a very high latency which 
 
 
 ---
-## Instructions from Udacity:
+## 7. Instructions from Udacity:
 
 This is the project repo for the final project of the Udacity Self-Driving Car Nanodegree: Programming a Real Self-Driving Car. For more information about the project, see the project introduction [here](https://classroom.udacity.com/nanodegrees/nd013/parts/6047fe34-d93c-4f50-8336-b70ef10cb4b2/modules/e1a23b06-329a-4684-a717-ad476f0d8dff/lessons/462c933d-9f24-42d3-8bdc-a08a5fc866e4/concepts/5ab4b122-83e6-436d-850f-9f4d26627fd9).
 
