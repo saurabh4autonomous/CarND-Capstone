@@ -44,16 +44,16 @@ class TLDetector(object):
         self.config = yaml.load(config_string)
 	rospy.logwarn("TL_Detector_Init")
         self.upcoming_red_light_pub = rospy.Publisher('/traffic_waypoint', Int32, queue_size=1)
-		self.has_image = False
+	self.has_image = False
         self.bridge = CvBridge()
-        self.light_classifier = TLClassifier()
+        self.light_classifier = TLClassifier(self.config['is_site'])
         self.listener = tf.TransformListener()
 	self.has_image = False
         self.state = TrafficLight.UNKNOWN
         self.last_state = TrafficLight.UNKNOWN
         self.last_wp = -1
         self.state_count = 0
-		self.frame_skip_counter = 0
+	self.frame_skip_counter = 0
         rospy.spin()
 
     def pose_cb(self, msg):
