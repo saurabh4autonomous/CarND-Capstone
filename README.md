@@ -178,7 +178,7 @@ In addition, selected frames from the Udacity [ROSbag playback file](https://s3-
 ## Final Integration
 #### Model Evaluation
 
-The following images show the classification results in the simulated environment.
+The following images show the classification results in the simulated environment for the three given states of the traffic lights. Four frames are skipped due to [latency issues](#latency-issue).
 
 ![red_img](./imgs/tl_red.png)
 ![yellow_img](./imgs/tl_yellow.png)
