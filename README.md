@@ -33,7 +33,7 @@
 5. [Final Integration](#5-final-integration)
 	1. [Model Evaluation](#i-model-evaluation)
 6. [Challenges Faced](#6-challenges-faced)
- 	1. [i. Workaround to avoid simulator latency issue with camera on](#i-workaround-to-avoid-simulator-latency-issue-with-camera-on)
+ 	1. [Latency Issue](#i-latency-issue)
 7. [Instructions from Udacity](#7-instructions-from-udacity)
 
 ## Introduction
