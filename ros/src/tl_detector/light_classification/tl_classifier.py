@@ -5,15 +5,17 @@ import cv2
 import rospy
 import time
 
-
-
-#SSD_GRAPH_FILE_SIM = 'light_classification/models/ssdlite_mobilenet_v2_coco_2018_05_09/frozen_inference_graph.pb'
-SSD_GRAPH_FILE_SIM = 'light_classification/model/frozen_inference_graph.pb'
+SSD_GRAPH_FILE_SIM = 'light_classification/models/Model_Sim/ssd_mobilenet_v1/frozen_inference_graph.pb'
+SSD_GRAPH_FILE_SITE = 'light_classification/models/Model_Site/ssdlite_mobilenet_v2/frozen_inference_graph.pb'
 
 class TLClassifier(object):
-    def __init__(self):
-        #TODO load classifier
-        self.graph = self.load_graph(SSD_GRAPH_FILE_SIM)
+    def __init__(self, is_site):
+        # Load inference graph.
+        if is_site:
+            self.graph = self.load_graph(SSD_GRAPH_FILE_SITE)
+        else:
+            self.graph = self.load_graph(SSD_GRAPH_FILE_SIM)
+            
         self.image_tensor = self.graph.get_tensor_by_name('image_tensor:0')
         self.detection_boxes = self.graph.get_tensor_by_name('detection_boxes:0')
         self.detection_scores = self.graph.get_tensor_by_name('detection_scores:0')
