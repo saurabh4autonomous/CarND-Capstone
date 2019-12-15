@@ -9,7 +9,7 @@
 |:-----------------:|:----------------------------:	|
 | Florian Stahl		| f.stahl@posteo.de 			|
 | Saurabh Sharma	| saurabh1588sharma@gmail.com	|
-| Hiroyuki Mori		| hiroyuki.mori555@gmail.com	|
+| Hiroyuki Mori		| m1338m@yahoo.co.jp	|
 | Shinya Fujimura	| shinya.fujimura@gmail.com		|
 | Elham Asadi		| dr.elham.asadi@gmail.com		|
 
