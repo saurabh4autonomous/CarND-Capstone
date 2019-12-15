@@ -62,7 +62,7 @@ The perception subsystem is implemented in `tl_detector.py`. It was designed to 
 
 To determine the state of relevant traffic lights, camera images are classified by a CNN-based tensorflow model. 
 
-The module also receives the waypoints (`/base_waypoints`) around the track which the car is supposed to follow. There are eight traffic lights around the track, and the position of their stop lines are provided by a config file from Udacity (`sim_traffic_light_config.yaml`). Taking the cars position into account, the position of the relevant traffic light is determined and combined with the information of the classifier.
+The module also receives the waypoints (`/base_waypoints`) around the track which the car is supposed to follow. There are eight traffic lights around the track, and the position of their stop lines are provided by a config file from Udacity (`sim_traffic_light_config.yaml`). Taking the cars position into account, the images are assumed to reflect the state of the closest traffic light ahead of the car. The traffic light state then affects the car's controller so that it stops at red lights and starts again when lights switch to green.
 
 ##### Subscribed Topics
 
