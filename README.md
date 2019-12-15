@@ -5,7 +5,7 @@
 ---
 ####  Notes to Reviewer
 
-| Name 						 | Role  		 			   | Email address                 | 
+| Name 						 | Responsibility  		 			   | Email address                 | 
 |:-----------------:		 |:----------:   			   |:----------------------------:	|
 | Florian Stahl	(Team Lead)	 | Perception    			   | f.stahl@posteo.de 			|
 | Fatemeh Elham Asadi		 | Perception    			   | elham.asadi@horiba-mira.com	|
@@ -74,6 +74,7 @@ The module also receives the waypoints (`/base_waypoints`) around the track whic
 
 ##### Implementation
 
+Implementation is described [here](https://github.com/FElhamAsadi/CarND-TrafficLightDetection)
 
 
 #### Planning Module
@@ -129,15 +130,15 @@ The outputs from the DBW node are the throttle, brake and steering commands publ
 Throttle and brake values are calculated as follows:
 
 1. Apply the low pass filter to the current velocity to reduce noise.
-2.	Calculate the difference between the current velocity and the target velocity (=vel_error)
-3.	Calculate the throttle value with the PID controller.
-4.	If the target velocity and the current velocity are almost 0, set the throttle to zero and apply the maximum braking value.
-5.	If vel_error is negative and the throttle value is less than 0.1, calculate the brake value by abs(decel) * self.vehicle_mass * self.wheel_radius. Set the deceleration value (=decel) at the maximum of vel_error and the deceleration limit. 
+2. Calculate the difference between the current velocity and the target velocity (=vel_error)
+3. Calculate the throttle value with the PID controller.
+4. If the target velocity and the current velocity are almost 0, set the throttle to zero and apply the maximum braking value.
+5. If vel_error is negative and the throttle value is less than 0.1, calculate the brake value by abs(decel) * self.vehicle_mass * self.wheel_radius. Set the deceleration value (=decel) at the maximum of vel_error and the deceleration limit. 
 
 Steering value is calculated as follows:
 
-1.	Apply the low pass filter to the current velocity to reduce noise.
-2.	Pass the linear velocity, the angular velocity and the current velocity to the yaw controller (=self.yaw_controller.get_steering)
+1. Apply the low pass filter to the current velocity to reduce noise.
+2. Pass the linear velocity, the angular velocity and the current velocity to the yaw controller (=self.yaw_controller.get_steering)
 
 For PID and the low pass filter, we chose each parameter as follows.
 
