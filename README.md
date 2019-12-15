@@ -60,7 +60,7 @@ The three parts are described in detail below.
 
 The perception subsystem is implemented in `tl_detector.py`. It was designed to classify traffic lights only, since those are the only relevant objects in the simulator and the surrounding during the tests in the real car.
 
-To determine the state of relevant traffic lights, camera images are classified by a CNN-based tensorflow model. 
+To determine the state of relevant traffic lights, camera images are classified by a CNN model based on the [Tensorflow ObjectDectection API](https://github.com/tensorflow/models/tree/master/research/object_detection).
 
 The module also receives the waypoints (`/base_waypoints`) around the track which the car is supposed to follow. There are eight traffic lights around the track, and the position of their stop lines are provided by a config file from Udacity (`sim_traffic_light_config.yaml`). Taking the cars position into account, the images are assumed to reflect the state of the closest traffic light ahead of the car. The traffic light state then affects the car's controller so that it stops at red lights and starts again when lights switch to green.
 
@@ -156,10 +156,15 @@ For PID and the low pass filter, we chose each parameter as follows.
 
 ## Dataset Preparation
 
+Training the classifier in tensorflow requires 
+For both simulator- and site data 
+
 #### i. Simulator Data
 
 #### ii. Site Data
 
+The dataset consists of 
+In addition, selected frames from the Udacity [ROSbag playback file](https://s3-us-west-1.amazonaws.com/udacity-selfdrivingcar/traffic_light_bag_file.zip) were exported, augmented, labeled and added to the dataset to be used for training as well.
 
 ## Traffic Light Classifier
 
