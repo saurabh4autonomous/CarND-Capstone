@@ -5,13 +5,13 @@
 ---
 ####  Notes to Reviewer
 
-| Name 				| Email address                 | 
-|:-----------------:|:----------------------------:	|
-| Florian Stahl		| f.stahl@posteo.de 			|
-| Saurabh Sharma	| saurabh1588sharma@gmail.com	|
-| Hiroyuki Mori		| m1338m@yahoo.co.jp	|
-| Shinya Fujimura	| shinya.fujimura@gmail.com		|
-| Elham Asadi		| elham.asadi@horiba-mira.com	|
+| Name 						 | Role  		 			   | Email address                 | 
+|:-----------------:		 |:----------:   			   |:----------------------------:	|
+| Florian Stahl	(Team Lead)	 | Perception    			   | f.stahl@posteo.de 			|
+| Fatemeh Elham Asadi		 | Perception    			   | elham.asadi@horiba-mira.com	|
+| Saurabh Sharma	 		 | Path Planning / Integration | saurabh1588sharma@gmail.com	|
+| Hiroyuki Mori		 		 | Control  	 			   | m1338m@yahoo.co.jp	|
+| Shinya Fujimura	 		 | Control  	 			   | shinya.fujimura@gmail.com		|
 
 ---
 ## Table of Contents
