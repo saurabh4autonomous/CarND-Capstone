@@ -189,10 +189,10 @@ The following images show the classification results in the simulated environmen
 ## Challenges Faced
 #### Latency Issue 
 
-When turning the camera on in the simulator, we faced a very high latency which led to control failure of the car. The following methods improved the issue slightly, but still did not solve it.
-- Processing every 5th image received,
-- Activating Classifier only when the traffic light waypoints are within 100 unit distance
-- Reducing Number of Waypoint Used to 50.
+When turning the camera on in the simulator, we faced a very high latency which led to control failure of the car. The following methods improved the issue slightly, but still did not solve it:
+- Processing only every 5th image received
+- Activating classifier only when the traffic light waypoints are within 100 unit distance
+- Reducing the number of waypoints used to 50
 
 
 
