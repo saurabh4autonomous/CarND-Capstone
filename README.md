@@ -40,9 +40,9 @@
 
 In the final project of the course we implemented code for a real self-driving car, which drives safely around a track. It recognizes traffic light signals and stops in case a red signal is detected. The system was first tested on a simulator and then on a real car.
 
-For running the system source code we used the virtual machine provided and recommended by Udacity while running the simulator on a Windows 10 host. Check [Section 7](#7-instructions-from-udacity) for more information.
+For running the system source code we used the virtual machine provided and recommended by Udacity while running the simulator on a Windows 10 host. Check [Section 7](#instructions-from-udacity) for more information.
 
-**Note: Since we experienced latency issues with the virtual machine setup, we highly recommend using a native ubuntu installation.**
+**Note: Since we experienced strong latency issues with the virtual machine setup, we highly recommend using a native ubuntu installation.**
 
 ## System Architecture
 
@@ -158,7 +158,7 @@ For PID and the low pass filter, we chose each parameter as follows.
 |0.5|0.02|
 
 
-## 3. Dataset Preparation
+## Dataset Preparation
 
 Training the classifier in tensorflow requires 
 For both simulator- and site data 
@@ -177,6 +177,13 @@ In addition, selected frames from the Udacity [ROSbag playback file](https://s3-
 
 ## Final Integration
 #### Model Evaluation
+
+The following images show the classification results in the simulated environment.
+
+![red_img](./imgs/tl_red.png)
+![yellow_img](./imgs/tl_yellow.png)
+![green_img](./imgs/tl_green.png)
+
 
 
 ## Challenges Faced
