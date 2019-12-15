@@ -11,7 +11,7 @@
 | Saurabh Sharma	| saurabh1588sharma@gmail.com	|
 | Hiroyuki Mori		| m1338m@yahoo.co.jp	|
 | Shinya Fujimura	| shinya.fujimura@gmail.com		|
-| Elham Asadi		| dr.elham.asadi@gmail.com		|
+| Elham Asadi		| elham.asadi@horiba-mira.com	|
 
 ---
 ## Table of Contents
