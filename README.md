@@ -32,14 +32,17 @@
 	6. [Export and test the final graph](#vi-export-and-test-the-final-graph)
 5. [Final Integration](#5-final-integration)
 	1. [Model Evaluation](#i-model-evaluation)
-6. [Hardware/Software Setup](#6-hardware-software-setup)
-7. [Challenges Faced](#7-challenges-faced)
+6. [Challenges Faced](#6-challenges-faced)
  	1. [i. Workaround to avoid simulator latency issue with camera on](#i-workaround-to-avoid-simulator-latency-issue-with-camera-on)
-___
+7. [Instructions from Udacity](#7-instructions-from-udacity)
 
 ## Introduction
 
 In the final project of the course we implemented code for a real self-driving car, which drives safely around a track. It recognizes traffic light signals and stops in case a red signal is detected. The system was first tested on a simulator and then on a real car.
+
+For running the system source code we used the virtual machine provided and recommended by Udacity while running the simulator on a Windows 10 host. Check [Section 7](#7-instructions-from-udacity) for more information.
+
+**Note: Since we experienced latency issues with the virtual machine setup, we highly recommend using a native ubuntu installation.**
 
 ## System Architecture
 
@@ -64,13 +67,13 @@ To determine the state of relevant traffic lights, camera images are classified 
 
 The module also receives the waypoints (`/base_waypoints`) around the track which the car is supposed to follow. There are eight traffic lights around the track, and the position of their stop lines are provided by a config file from Udacity (`sim_traffic_light_config.yaml`). Taking the cars position into account, the images are assumed to reflect the state of the closest traffic light ahead of the car. The traffic light state then affects the car's controller so that it stops at red lights and starts again when lights switch to green.
 
-##### Subscribed Topics
+###### Subscribed Topics
 
 - `\image_color`: color images from the front-camera within the simulated car
 - `\current_pose`: the current position coordinates of our car
 - `\base_waypoints`: list of all waypoints for the track
 
-##### Published Topics
+###### Published Topics
 
 - `\traffic_waypoint`: single waypoint of the nearest upcoming red light's stop line 
 
@@ -174,16 +177,19 @@ In addition, selected frames from the Udacity [ROSbag playback file](https://s3-
 ## Final Integration
 #### i. Model Evaluation
 
-## Hardware/Software Setup
 
 ## Challenges Faced
-#### i. Workaround to avoid simulator latency issue with camera on
+#### i. Latency Issue 
+
+When turning the camera on in the simulator, we faced a very high latency which led to control failure of the car. The following methods improved the issue slightly, but still did not solve it.
 - Processing every 5th image received,
 - Activating Classifier only when the traffic light waypoints are within 100 unit distance
 - Reducing Number of Waypoint Used to 50.
 
+
+
 ---
-## Original README:
+## Instructions from Udacity:
 
 This is the project repo for the final project of the Udacity Self-Driving Car Nanodegree: Programming a Real Self-Driving Car. For more information about the project, see the project introduction [here](https://classroom.udacity.com/nanodegrees/nd013/parts/6047fe34-d93c-4f50-8336-b70ef10cb4b2/modules/e1a23b06-329a-4684-a717-ad476f0d8dff/lessons/462c933d-9f24-42d3-8bdc-a08a5fc866e4/concepts/5ab4b122-83e6-436d-850f-9f4d26627fd9).
 
