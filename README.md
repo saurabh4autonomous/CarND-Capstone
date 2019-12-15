@@ -15,26 +15,26 @@
 
 ---
 ## Table of Contents
-[1. Introduction](#1.-introduction)
-[2. System Architecture](#2.-system-architecture)
-	[i. Perception Module](#i-perception-module)
-	[ii. Planning Module](#ii-planning-module)
-	[iii. Control Module](#iii-control-module)
-[3. Dataset Preparation](#3.-dataset-preparation)
-	[i. Simulator Data](#i.-simulator-data)
-	[ii. Site Data](#ii.-site-data)
-[4. Traffic Light Classifier](#4.-traffic-light-classifier)
+1. [Introduction](#1.-introduction)
+2. [System Architecture](#2.-system-architecture)
+	i. [Perception Module](#i-perception-module)
+	ii. [Planning Module](#ii-planning-module)
+	iii. [Control Module](#iii-control-module)
+3. [Dataset Preparation](#3.-dataset-preparation)
+	i. [Simulator Data](#i.-simulator-data)
+	ii. [Site Data](#ii.-site-data)
+4. [Traffic Light Classifier](#4.-traffic-light-classifier)
 	i. [Tensorflow Object Detection API Installation](#i.-tensorflow-object-detection-api-installation)
 	ii. [Choose and test a model from the Model Zoo](#ii.-choose-and-test-a-model-from-the-model-zoo)
 	iii. [Configure the pipeline.config file](#iii.-configure-the-pipelineconfig-file)
 	iv. [Test the training process locally](#iv.-test-the-training-process-locally)
 	v. [Train with GPUs](#v.-train-with-gpus)
 	vi. [Export and test the final graph](#vi.-export-and-test-the-final-graph)
-[5. Final Integration](#5.-final-integration)
+5. [Final Integration](#5.-final-integration)
 	i. [Model Evaluation](#i.-model-evaluation)
-[6. Challenges Faced](#6.-challenges-faced)
+6. [Challenges Faced](#6.-challenges-faced)
  	i. [Latency Issue](#i.-latency-issue)
-[7. Instructions from Udacity](#7.-instructions-from-udacity)
+7. [Instructions from Udacity](#7.-instructions-from-udacity)
 
 ## 1. Introduction
 
