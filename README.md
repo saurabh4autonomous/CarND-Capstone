@@ -24,12 +24,6 @@
 	* [Simulator Data](#simulator-data)
 	* [Site Data](#site-data)
 * [Traffic Light Classifier](#traffic-light-classifier)
-	* [Tensorflow Object Detection API Installation](#tensorflow-object-detection-api-installation)
-	* [Choose and test a model from the Model Zoo](#choose-and-test-a-model-from-the-model-zoo)
-	* [Configure the pipeline.config file](#configure-the-pipelineconfig-file)
-	* [Test the training process locally](#test-the-training-process-locally)
-	* [Train with GPUs](#train-with-gpus)
-	* [Export and test the final graph](#export-and-test-the-final-graph)
 * [Final Integration](#final-integration)
 	* [Model Evaluation](#model-evaluation)
 * [Challenges Faced](#challenges-faced)
@@ -158,22 +152,12 @@ For PID and the low pass filter, we chose each parameter as follows.
 |0.5|0.02|
 
 
-## Dataset Preparation
-
-Training the classifier in tensorflow requires 
-For both simulator- and site data 
-
-#### Simulator Data
-
-#### Site Data
-
-The dataset consists of 
-In addition, selected frames from the Udacity [ROSbag playback file](https://s3-us-west-1.amazonaws.com/udacity-selfdrivingcar/traffic_light_bag_file.zip) were exported, augmented, labeled and added to the dataset to be used for training as well.
 
 ## Traffic Light Classifier
 
-#### Tensorflow Object Detection API Installation
-#### Choose and test a model from the Model Zoo
+The development of the classifier is described [here](https://github.com/FElhamAsadi/CarND-TrafficLightDetection).
+
+
 
 ## Final Integration
 #### Model Evaluation
