@@ -144,6 +144,9 @@ For PID and the low pass filter, we chose each parameter as follows.
 
 ## Traffic Light Classifier
 
+Data Augmentation methods have been used for this Project for training our model.
+Please visit [here](https://github.com/saurabh4autonomous/Image-Data-Augmentation-for-Deep-Learning)
+
 The development of the classifier is described [here](https://github.com/FElhamAsadi/CarND-TrafficLightDetection).
 
 
